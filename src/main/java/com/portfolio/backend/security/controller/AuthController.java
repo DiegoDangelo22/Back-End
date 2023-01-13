@@ -56,7 +56,7 @@ public class AuthController {
     public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult) {
         
         if(bindingResult.hasErrors())
-            return new ResponseEntity(new Mensaje("Campos obligatorios"),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Mensaje("Campos incorrectos"),HttpStatus.BAD_REQUEST);
         
         if(usuarioService.existsByNombreUsuario(nuevoUsuario.getNombreUsuario()))
             return new ResponseEntity(new Mensaje("Ese nombre de usuario ya existe"),HttpStatus.BAD_REQUEST);
