@@ -1,56 +1,39 @@
-package com.portfolio.backend.model;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.portfolio.backend.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotBlank;
 
-@Entity
-public class Persona {
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
-    
-    @NotNull
-    @Size(min = 1, max = 50)
+/**
+ *
+ * @author Diego
+ */
+
+public class PersonaDTO {
+    @NotBlank
     private String nombre;
-    
-    @NotNull
-    @Size(min = 1, max = 50)
+    @NotBlank
     private String apellido;
-    
-    @NotNull
-    private String descripcion;
-    
-    @NotNull
-    @Size(min = 1, max = 35)
+    @NotBlank
+    private String descripcion;  
+    @NotBlank
     private String profesion;
-    
+    @NotBlank
     private String img;
 
     // Constructor
     
-    public Persona() {
+    public PersonaDTO() {
     }
 
-    public Persona(String nombre, String apellido, String descripcion, String profesion, String img) {
+    public PersonaDTO(String nombre, String apellido, String descripcion, String profesion, String img) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.descripcion = descripcion;
         this.profesion = profesion;
         this.img = img;
-    }
-    
-    // Getter y Setter
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNombre() {

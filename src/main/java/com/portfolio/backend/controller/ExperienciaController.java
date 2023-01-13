@@ -13,6 +13,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/explab")
-@CrossOrigin(origins = "https://front-end-f038b.web.app")
+@CrossOrigin(origins = {"http://localhost:4200", "https://front-end-f038b.web.app"})
 public class ExperienciaController {
     @Autowired
     ExperienciaService experienciaService;
@@ -41,6 +42,7 @@ public class ExperienciaController {
         return new ResponseEntity(list,HttpStatus.OK);
     }
     
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody ExperienciaDTO expdto){
 //        if(StringUtils.isBlank(expdto.getNombreExp()))
@@ -54,6 +56,7 @@ public class ExperienciaController {
         return new ResponseEntity(new Mensaje("Experiencia agregada"),HttpStatus.OK);
     }
     
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody ExperienciaDTO expdto){
         if(!experienciaService.existsById(id))
@@ -71,6 +74,7 @@ public class ExperienciaController {
         return new ResponseEntity(new Mensaje("Experiencia actualizada"),HttpStatus.OK);
     }
     
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id){
         if(!experienciaService.existsById(id))

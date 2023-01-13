@@ -6,6 +6,8 @@ package com.portfolio.backend.security.dto;
 
 import java.util.HashSet;
 import java.util.Set;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -13,21 +15,15 @@ import java.util.Set;
  */
 
 public class NuevoUsuario {
-    private String nombre;
+    @NotBlank
+    @Size(min = 3, max = 50)
     private String nombreUsuario;
-    private String email;
+    @NotBlank
+    @Size(min = 4, max = 50)
     private String password;
     private Set<String> roles = new HashSet<>();
     
     // Getters y Setters
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -35,14 +31,6 @@ public class NuevoUsuario {
 
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPassword() {
