@@ -9,8 +9,10 @@ com\portfolio\backend\dto\ExperienciaDTO.class
 com\portfolio\backend\repository\ExperienciaRepository.class
 com\portfolio\backend\security\entity\UsuarioPrincipal.class
 com\portfolio\backend\security\MainSecurity.class
+com\portfolio\backend\model\Proyectos.class
 com\portfolio\backend\security\dto\JwtDTO.class
 com\portfolio\backend\model\Persona.class
+com\portfolio\backend\repository\ProyectosRepository.class
 com\portfolio\backend\security\jwt\JwtProvider.class
 com\portfolio\backend\controller\ExperienciaController.class
 com\portfolio\backend\model\Educacion.class
@@ -21,11 +23,13 @@ com\portfolio\backend\security\dto\NuevoUsuario.class
 com\portfolio\backend\security\controller\AuthController.class
 com\portfolio\backend\security\service\UserDetailsImpl.class
 com\portfolio\backend\controller\PersonaController.class
+com\portfolio\backend\dto\ProyectosDTO.class
 com\portfolio\backend\security\jwt\JwtTokenFilter.class
 com\portfolio\backend\controller\EducacionController.class
 com\portfolio\backend\security\repository\iRolRepository.class
 com\portfolio\backend\service\EducacionService.class
 com\portfolio\backend\security\entity\Usuario.class
+com\portfolio\backend\service\ProyectosService.class
 com\portfolio\backend\security\dto\LoginUsuario.class
 com\portfolio\backend\repository\HySRepository.class
 com\portfolio\backend\security\jwt\JwtEntryPoint.class
@@ -35,5 +39,6 @@ com\portfolio\backend\security\entity\Rol.class
 com\portfolio\backend\dto\HySDTO.class
 com\portfolio\backend\security\controller\Mensaje.class
 com\portfolio\backend\dto\PersonaDTO.class
+com\portfolio\backend\controller\ProyectosController.class
 com\portfolio\backend\model\HyS.class
 com\portfolio\backend\service\PersonaService.class

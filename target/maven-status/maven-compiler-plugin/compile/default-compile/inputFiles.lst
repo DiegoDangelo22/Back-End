@@ -1,5 +1,6 @@
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\security\entity\Rol.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\dto\ExperienciaDTO.java
+C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\service\ProyectosService.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\security\jwt\JwtEntryPoint.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\security\dto\LoginUsuario.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\security\dto\NuevoUsuario.java
@@ -12,6 +13,7 @@ C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\securi
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\BackendApplication.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\model\Persona.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\service\HySService.java
+C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\model\Proyectos.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\security\jwt\JwtProvider.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\controller\PersonaController.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\controller\ExperienciaController.java
@@ -26,14 +28,17 @@ C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\reposi
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\security\service\UserDetailsImpl.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\controller\EducacionController.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\repository\PersonaRepository.java
+C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\dto\ProyectosDTO.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\security\dto\JwtDTO.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\security\service\RolService.java
+C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\repository\ProyectosRepository.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\model\Experiencia.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\model\Educacion.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\security\service\UsuarioService.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\security\jwt\JwtTokenFilter.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\model\HyS.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\security\entity\UsuarioPrincipal.java
+C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\controller\ProyectosController.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\dto\PersonaDTO.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\service\PersonaService.java
 C:\Users\Diego\Desktop\Portfolio\Back\src\main\java\com\portfolio\backend\security\repository\iRolRepository.java
