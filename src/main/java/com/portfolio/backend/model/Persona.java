@@ -27,7 +27,7 @@ public class Persona {
     @NotNull
     @Size(min = 1, max = 35)
     private String profesion;
-    
+    @NotNull
     private String img;
 
     // Constructor
