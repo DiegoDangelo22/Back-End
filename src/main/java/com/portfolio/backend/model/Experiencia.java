@@ -4,10 +4,16 @@
  */
 package com.portfolio.backend.model;
 
+import com.portfolio.backend.security.entity.Usuario;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
@@ -15,6 +21,7 @@ import javax.persistence.Id;
  */
 
 @Entity
+@Table(name = "experiencia")
 public class Experiencia {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,15 +29,20 @@ public class Experiencia {
     private String nombreExp;
     private String descripcionExp;
     
+    @ManyToOne()
+    @JoinColumn(name = "creado_por", referencedColumnName = "id")
+    private Usuario usuario;
     // Constructores
 
     public Experiencia() {
     }
 
-    public Experiencia(String nombreExp, String descripcionExp) {
+    public Experiencia(String nombreExp, String descripcionExp, Usuario usuario) {
         this.nombreExp = nombreExp;
         this.descripcionExp = descripcionExp;
+        this.usuario = usuario;
     }
+
     
     // Getters y Setters
 
@@ -56,6 +68,14 @@ public class Experiencia {
 
     public void setDescripcionExp(String descripcionExp) {
         this.descripcionExp = descripcionExp;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
     
 }

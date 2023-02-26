@@ -4,6 +4,7 @@
  */
 package com.portfolio.backend.security.entity;
 
+import com.portfolio.backend.model.Experiencia;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,7 +15,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -23,6 +28,7 @@ import javax.validation.constraints.NotNull;
  */
 
 @Entity
+@Table(name = "usuario")
 public class Usuario {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -36,14 +42,18 @@ public class Usuario {
     @JoinTable(name="usuario_rol", joinColumns=@JoinColumn(name="usuario_id"), inverseJoinColumns=@JoinColumn(name="rol_id"))
     private Set<Rol> roles = new HashSet<>();
     
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Experiencia> experiencia;
+
     // Constructores
 
     public Usuario() {
     }
 
-    public Usuario(String nombreUsuario, String password) {
+    public Usuario(String nombreUsuario, String password, List<Experiencia> experiencia) {
         this.nombreUsuario = nombreUsuario;
         this.password = password;
+        this.experiencia = experiencia;
     }
     
     // Getter y Setter
@@ -80,4 +90,11 @@ public class Usuario {
         this.roles = roles;
     }
     
+    public List<Experiencia> getExperiencia() {
+        return experiencia;
+    }
+    
+    public void setExperiencia(List<Experiencia> experiencia) {
+        this.experiencia = experiencia;
+    }
 }

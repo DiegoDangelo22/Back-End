@@ -4,7 +4,9 @@
  */
 package com.portfolio.backend.security.dto;
 
+import com.portfolio.backend.model.Experiencia;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -22,6 +24,7 @@ public class NuevoUsuario {
     @Size(min = 4, max = 50)
     private String password;
     private Set<String> roles = new HashSet<>();
+    private List<Experiencia> experiencia;
     
     // Getters y Setters
 
@@ -47,6 +50,14 @@ public class NuevoUsuario {
 
     public void setRoles(Set<String> roles) {
         this.roles = roles;
+    }
+
+    public List<Experiencia> getExperiencia() {
+        return experiencia;
+    }
+
+    public void setExperiencia(List<Experiencia> experiencia) {
+        this.experiencia = experiencia;
     }
     
 }
