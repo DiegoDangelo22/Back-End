@@ -8,7 +8,11 @@ import com.portfolio.backend.dto.ProyectosDTO;
 import com.portfolio.backend.model.Proyectos;
 import com.portfolio.backend.security.controller.Mensaje;
 import com.portfolio.backend.service.ProyectosService;
+import java.math.BigInteger;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +39,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProyectosController {
     @Autowired
     ProyectosService proyectosService;
+    @Autowired
+    private EntityManager entityManager;
+    
+    @GetMapping("/data")
+    public Integer getData() {
+        Query query = entityManager.createNativeQuery("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'portfolio' AND TABLE_NAME = 'proyectos'");
+        return ((BigInteger) query.getSingleResult()).intValue();
+    }
     
     @GetMapping("/lista")
     public ResponseEntity<List<Proyectos>> list(){
