@@ -44,7 +44,7 @@ public class ProyectosController {
     
     @GetMapping("/data")
     public Integer getData() {
-        Query query = entityManager.createNativeQuery("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'portfolio' AND TABLE_NAME = 'proyectos'");
+        Query query = entityManager.createNativeQuery("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'railway' AND TABLE_NAME = 'proyectos'");
         return ((BigInteger) query.getSingleResult()).intValue();
     }
     
