@@ -80,9 +80,9 @@ public class EducacionController {
         if(educacionService.existsByNombreEdu(educacionDTO.getNombreEdu()) && educacionService.getByNombreEdu(educacionDTO.getNombreEdu()).get().getId() != id){
             return new ResponseEntity(new Mensaje("Ese nombre ya existe"),HttpStatus.BAD_REQUEST);
         }
-        if(StringUtils.isBlank(educacionDTO.getNombreEdu())){
-            return new ResponseEntity(new Mensaje("El campo no puede estar vacío"),HttpStatus.BAD_REQUEST);
-        }
+//        if(StringUtils.isBlank(educacionDTO.getNombreEdu())){
+//            return new ResponseEntity(new Mensaje("El campo no puede estar vacío"),HttpStatus.BAD_REQUEST);
+//        }
         
         Educacion educacion = educacionService.getOne(id).get();
         

@@ -63,8 +63,8 @@ public class ExperienciaController {
             return new ResponseEntity(new Mensaje("El ID no existe"),HttpStatus.BAD_REQUEST);
         if(experienciaService.existsByNombreExp(expdto.getNombreExp()) && experienciaService.getByNombreExp(expdto.getNombreExp()).get().getId() != id)
             return new ResponseEntity(new Mensaje("Esa experiencia ya existe"),HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(expdto.getNombreExp()))
-            return new ResponseEntity(new Mensaje("El nombre es obligatorio"),HttpStatus.BAD_REQUEST);
+//        if(StringUtils.isBlank(expdto.getNombreExp()))
+//            return new ResponseEntity(new Mensaje("El nombre es obligatorio"),HttpStatus.BAD_REQUEST);
         
         Experiencia experiencia = experienciaService.getOne(id).get();
         experiencia.setNombreExp(expdto.getNombreExp());
