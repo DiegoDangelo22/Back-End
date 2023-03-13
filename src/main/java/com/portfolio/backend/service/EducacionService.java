@@ -6,6 +6,8 @@ package com.portfolio.backend.service;
 
 import com.portfolio.backend.model.Educacion;
 import com.portfolio.backend.repository.EducacionRepository;
+import com.portfolio.backend.security.entity.Usuario;
+import com.portfolio.backend.security.service.UsuarioService;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -49,6 +51,20 @@ public class EducacionService {
     
     public boolean existsByNombreEdu(String nombreEdu){
         return educacionRepository.existsByNombreEdu(nombreEdu);
+    }
+    
+    @Autowired
+    private UsuarioService usuarioService;
+    
+    public Educacion saveInformation(Educacion educacion, int userId) {
+        Optional<Usuario> usuarioOptional = usuarioService.getUserById(userId);
+        Usuario usuario = usuarioOptional.orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        educacion.setUsuario(usuario);
+        return educacionRepository.save(educacion);
+    }
+    
+    public List<Educacion> getAllEducacionesByUsuario(int usuarioId) {
+        return educacionRepository.findAllByUsuarioId(usuarioId);
     }
 
 }

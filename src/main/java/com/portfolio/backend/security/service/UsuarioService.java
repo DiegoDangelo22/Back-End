@@ -41,4 +41,9 @@ public class UsuarioService {
     public void save(Usuario usuario) {
         iusuarioRepository.save(usuario);
     }
+    
+    public Optional<Usuario> getUserById(int id) {
+        return iusuarioRepository.findById(id);
+    }
+
 }

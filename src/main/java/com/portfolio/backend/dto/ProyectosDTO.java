@@ -18,14 +18,16 @@ public class ProyectosDTO {
     private String descripcion;
     @NotBlank
     private String img;
+    private int usuarioId;
 
     public ProyectosDTO() {
     }
 
-    public ProyectosDTO(String proyecto, String descripcion, String img) {
+    public ProyectosDTO(String proyecto, String descripcion, String img, int usuarioId) {
         this.proyecto = proyecto;
         this.descripcion = descripcion;
         this.img = img;
+        this.usuarioId = usuarioId;
     }
 
     public String getProyecto() {
@@ -51,4 +53,13 @@ public class ProyectosDTO {
     public void setImg(String img) {
         this.img = img;
     }
+    
+    public int getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(int usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+    
 }

@@ -8,6 +8,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.portfolio.backend.dto.ExperienciaDTO;
 import com.portfolio.backend.model.Experiencia;
 import com.portfolio.backend.security.controller.Mensaje;
+import com.portfolio.backend.security.entity.Usuario;
+import com.portfolio.backend.security.service.UsuarioService;
 import com.portfolio.backend.service.ExperienciaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ExperienciaController {
     @Autowired
     ExperienciaService experienciaService;
+    @Autowired
+    private UsuarioService usuarioService;
     
     @GetMapping("/lista")
     public ResponseEntity<List<Experiencia>> list(){
@@ -42,21 +46,21 @@ public class ExperienciaController {
         return new ResponseEntity(list,HttpStatus.OK);
     }
     
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody ExperienciaDTO expdto){
 //        if(StringUtils.isBlank(expdto.getNombreExp()))
 //            return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
 //        if(experienciaService.existsByNombreExp(expdto.getNombreExp()))
 //            return new ResponseEntity(new Mensaje("Esa experiencia ya existe"),HttpStatus.BAD_REQUEST);
-        
-        Experiencia experiencia = new Experiencia(expdto.getNombreExp(), expdto.getDescripcionExp(), expdto.getUsuario());
+        Usuario usuario = usuarioService.getUserById(expdto.getUsuarioId()).orElseThrow(() -> new RuntimeException("No se pudo encontrar el usuario con el ID proporcionado."));
+        Experiencia experiencia = new Experiencia(expdto.getNombreExp(), expdto.getDescripcionExp(), usuario);
         experienciaService.save(experiencia);
         
         return new ResponseEntity(new Mensaje("Experiencia agregada"),HttpStatus.OK);
     }
     
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody ExperienciaDTO expdto){
         if(!experienciaService.existsById(id))
@@ -74,7 +78,7 @@ public class ExperienciaController {
         return new ResponseEntity(new Mensaje("Experiencia actualizada"),HttpStatus.OK);
     }
     
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id){
         if(!experienciaService.existsById(id))

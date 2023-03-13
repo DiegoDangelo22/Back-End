@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -34,7 +35,11 @@ public class JwtProvider {
     
     public String generateToken(Authentication authentication) {
         UsuarioPrincipal usuarioPrincipal = (UsuarioPrincipal) authentication.getPrincipal();
+        SecurityContextHolder.getContext().getAuthentication();
+        int userId = ((UsuarioPrincipal) authentication.getPrincipal()).getId();
+
         return Jwts.builder().setSubject(usuarioPrincipal.getUsername())
+                .claim("userId", userId)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime()+expiration*1000))
                 .signWith(SignatureAlgorithm.HS512, secret)

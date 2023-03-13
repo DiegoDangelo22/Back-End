@@ -22,18 +22,20 @@ public class PersonaDTO {
     private String profesion;
     @NotBlank
     private String img;
+    private int usuarioId;
 
     // Constructor
     
     public PersonaDTO() {
     }
 
-    public PersonaDTO(String nombre, String apellido, String descripcion, String profesion, String img) {
+    public PersonaDTO(String nombre, String apellido, String descripcion, String profesion, String img, int usuarioId) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.descripcion = descripcion;
         this.profesion = profesion;
         this.img = img;
+        this.usuarioId = usuarioId;
     }
 
     public String getNombre() {
@@ -74,6 +76,14 @@ public class PersonaDTO {
 
     public void setImg(String img) {
         this.img = img;
+    }
+    
+    public int getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(int usuarioId) {
+        this.usuarioId = usuarioId;
     }
     
 }

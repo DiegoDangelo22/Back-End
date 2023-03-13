@@ -24,7 +24,6 @@ public class NuevoUsuario {
     @Size(min = 4, max = 50)
     private String password;
     private Set<String> roles = new HashSet<>();
-    private List<Experiencia> experiencia;
     
     // Getters y Setters
 
@@ -50,14 +49,6 @@ public class NuevoUsuario {
 
     public void setRoles(Set<String> roles) {
         this.roles = roles;
-    }
-
-    public List<Experiencia> getExperiencia() {
-        return experiencia;
-    }
-
-    public void setExperiencia(List<Experiencia> experiencia) {
-        this.experiencia = experiencia;
     }
     
 }

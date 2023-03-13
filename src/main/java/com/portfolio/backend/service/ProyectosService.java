@@ -6,6 +6,8 @@ package com.portfolio.backend.service;
 
 import com.portfolio.backend.model.Proyectos;
 import com.portfolio.backend.repository.ProyectosRepository;
+import com.portfolio.backend.security.entity.Usuario;
+import com.portfolio.backend.security.service.UsuarioService;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -50,4 +52,19 @@ public class ProyectosService {
     public boolean existsByProyecto(String proyecto){
         return proyectosRepo.existsByProyecto(proyecto);
     }
+    
+    @Autowired
+    private UsuarioService usuarioService;
+    
+    public Proyectos saveInformation(Proyectos proyecto, int userId) {
+        Optional<Usuario> usuarioOptional = usuarioService.getUserById(userId);
+        Usuario usuario = usuarioOptional.orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        proyecto.setUsuario(usuario);
+        return proyectosRepo.save(proyecto);
+    }
+    
+    public List<Proyectos> getAllProyectosByUsuario(int usuarioId) {
+        return proyectosRepo.findAllByUsuarioId(usuarioId);
+    }
+    
 }

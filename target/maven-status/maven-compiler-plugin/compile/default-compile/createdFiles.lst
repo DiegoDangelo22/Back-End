@@ -1,3 +1,4 @@
+com\portfolio\backend\controller\UsuarioController.class
 com\portfolio\backend\security\repository\iUsuarioRepository.class
 com\portfolio\backend\controller\HySController.class
 com\portfolio\backend\security\enums\RolNombre.class

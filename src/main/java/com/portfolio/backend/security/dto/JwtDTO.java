@@ -16,13 +16,15 @@ public class JwtDTO {
     private String token;
     private String bearer = "Bearer";
     private String nombreUsuario;
+    private int userId;
     private Collection<? extends GrantedAuthority> authorities;
     
     // Constructor
 
-    public JwtDTO(String token, String nombreUsuario, Collection<? extends GrantedAuthority> authorities) {
+    public JwtDTO(String token, String nombreUsuario, int userId, Collection<? extends GrantedAuthority> authorities) {
         this.token = token;
         this.nombreUsuario = nombreUsuario;
+        this.userId = userId;
         this.authorities = authorities;
     }
     
@@ -50,6 +52,14 @@ public class JwtDTO {
 
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -7,6 +7,7 @@ package com.portfolio.backend.security.entity;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +18,8 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 
 public class UsuarioPrincipal implements UserDetails {
+    @Autowired
+    Usuario usuario;
     private String nombreUsuario;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
@@ -31,7 +34,13 @@ public class UsuarioPrincipal implements UserDetails {
     
     public static UsuarioPrincipal build(Usuario usuario) {
         List<GrantedAuthority> authorities = usuario.getRoles().stream().map(rol -> new SimpleGrantedAuthority(rol.getRolNombre().name())).collect(Collectors.toList());
-        return new UsuarioPrincipal(usuario.getNombreUsuario(), usuario.getPassword(), authorities);
+        UsuarioPrincipal userPrincipal = new UsuarioPrincipal(usuario.getNombreUsuario(), usuario.getPassword(), authorities);
+        userPrincipal.usuario = usuario;
+        return userPrincipal;
+    }
+    
+    public int getId() {
+        return this.usuario.getId();
     }
 
     @Override

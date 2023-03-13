@@ -6,6 +6,8 @@ package com.portfolio.backend.service;
 
 import com.portfolio.backend.model.HyS;
 import com.portfolio.backend.repository.HySRepository;
+import com.portfolio.backend.security.entity.Usuario;
+import com.portfolio.backend.security.service.UsuarioService;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -50,4 +52,19 @@ public class HySService {
     public boolean existsByName(String name) {
         return hysRepo.existsByName(name);
     }
+    
+    @Autowired
+    private UsuarioService usuarioService;
+    
+    public HyS saveInformation(HyS hys, int userId) {
+        Optional<Usuario> usuarioOptional = usuarioService.getUserById(userId);
+        Usuario usuario = usuarioOptional.orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        hys.setUsuario(usuario);
+        return hysRepo.save(hys);
+    }
+    
+    public List<HyS> getAllHySByUsuario(int usuarioId) {
+        return hysRepo.findAllByUsuarioId(usuarioId);
+    }
+    
 }

@@ -19,17 +19,17 @@ public class ExperienciaDTO {
 
     private String descripcionExp;
     
-    private Usuario usuario;
+    private int usuarioId;
     
     // Constructores
 
     public ExperienciaDTO() {
     }
 
-    public ExperienciaDTO(String nombreExp, String descripcionExp, Usuario usuario) {
+    public ExperienciaDTO(String nombreExp, String descripcionExp, int usuarioId) {
         this.nombreExp = nombreExp;
         this.descripcionExp = descripcionExp;
-        this.usuario = usuario;
+        this.usuarioId = usuarioId;
     }
     
     // Getters y Setters
@@ -50,12 +50,12 @@ public class ExperienciaDTO {
         this.descripcionExp = descripcionExp;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public int getUsuarioId() {
+        return usuarioId;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuarioId(int usuarioId) {
+        this.usuarioId = usuarioId;
     }
     
 }

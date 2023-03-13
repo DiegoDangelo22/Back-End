@@ -16,13 +16,15 @@ public class HySDTO {
     private String name;
     @NotBlank
     private int percentage;
+    private int usuarioId;
 
     public HySDTO() {
     }
 
-    public HySDTO(String name, int percentage) {
+    public HySDTO(String name, int percentage, int usuarioId) {
         this.name = name;
         this.percentage = percentage;
+        this.usuarioId = usuarioId;
     }
 
     public String getName() {
@@ -39,6 +41,14 @@ public class HySDTO {
 
     public void setPercentage(int percentage) {
         this.percentage = percentage;
+    }
+    
+    public int getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(int usuarioId) {
+        this.usuarioId = usuarioId;
     }
     
 }

@@ -6,6 +6,8 @@ package com.portfolio.backend.service;
 
 import com.portfolio.backend.model.Experiencia;
 import com.portfolio.backend.repository.ExperienciaRepository;
+import com.portfolio.backend.security.entity.Usuario;
+import com.portfolio.backend.security.service.UsuarioService;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -50,4 +52,19 @@ public class ExperienciaService {
     public boolean existsByNombreExp(String nombreExp){
         return experienciaRepository.existsByNombreExp(nombreExp);
     }
+    
+    @Autowired
+    private UsuarioService usuarioService;
+    
+    public Experiencia saveInformation(Experiencia experiencia, int userId) {
+        Optional<Usuario> usuarioOptional = usuarioService.getUserById(userId);
+        Usuario usuario = usuarioOptional.orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        experiencia.setUsuario(usuario);
+        return experienciaRepository.save(experiencia);
+    }
+    
+    public List<Experiencia> getAllExperienciasByUsuario(int usuarioId) {
+        return experienciaRepository.findAllByUsuarioId(usuarioId);
+    }
+    
 }

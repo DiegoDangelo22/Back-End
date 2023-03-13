@@ -7,6 +7,7 @@ package com.portfolio.backend.model;
 import com.portfolio.backend.security.entity.Usuario;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,15 +25,13 @@ import javax.persistence.Table;
 @Table(name = "experiencia")
 public class Experiencia {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nombreExp;
-    private String descripcionExp;
-    
-    @ManyToOne()
-    @JoinColumn(name = "creado_por", referencedColumnName = "id")
+    private String descripcionExp;  
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Usuario usuario;
-    // Constructores
 
     public Experiencia() {
     }

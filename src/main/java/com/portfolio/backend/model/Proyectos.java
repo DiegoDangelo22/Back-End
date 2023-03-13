@@ -4,10 +4,15 @@
  */
 package com.portfolio.backend.model;
 
+import com.portfolio.backend.security.entity.Usuario;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -16,6 +21,7 @@ import javax.validation.constraints.NotNull;
  */
 
 @Entity
+@Table(name = "proyectos")
 public class Proyectos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,14 +32,18 @@ public class Proyectos {
     private String descripcion;
     @NotNull
     private String img;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private Usuario usuario;
 
     public Proyectos() {
     }
 
-    public Proyectos(String proyecto, String descripcion, String img) {
+    public Proyectos(String proyecto, String descripcion, String img, Usuario usuario) {
         this.proyecto = proyecto;
         this.descripcion = descripcion;
         this.img = img;
+        this.usuario = usuario;
     }
 
     public int getId() {
@@ -66,6 +76,14 @@ public class Proyectos {
     
     public void setImg(String img) {
         this.img = img;
+    }
+    
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
     
 }

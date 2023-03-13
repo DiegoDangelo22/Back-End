@@ -4,6 +4,8 @@
  */
 package com.portfolio.backend.dto;
 
+import com.portfolio.backend.security.entity.Usuario;
+
 
 
 /**
@@ -16,14 +18,17 @@ public class EducacionDTO {
     private String nombreEdu;
 
     private String descripcionEdu;
+    
+    private int usuarioId;
 
     public EducacionDTO() {
     }
 
     
-    public EducacionDTO(String nombreEdu, String descripcionEdu) {
+    public EducacionDTO(String nombreEdu, String descripcionEdu, int usuarioId) {
         this.nombreEdu = nombreEdu;
         this.descripcionEdu = descripcionEdu;
+        this.usuarioId = usuarioId;
     }
 
     public String getNombreEdu() {
@@ -41,5 +46,15 @@ public class EducacionDTO {
     public void setDescripcionEdu(String descripcionEdu) {
         this.descripcionEdu = descripcionEdu;
     }
+
+    public int getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(int usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    
     
 }

@@ -7,6 +7,8 @@ package com.portfolio.backend.controller;
 import com.portfolio.backend.dto.HySDTO;
 import com.portfolio.backend.model.HyS;
 import com.portfolio.backend.security.controller.Mensaje;
+import com.portfolio.backend.security.entity.Usuario;
+import com.portfolio.backend.security.service.UsuarioService;
 import com.portfolio.backend.service.HySService;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -35,6 +37,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class HySController {
     @Autowired
     HySService hysServ;
+    @Autowired
+    private UsuarioService usuarioService;
     
     @GetMapping("/lista")
     public ResponseEntity<List<HyS>> list(){
@@ -42,21 +46,21 @@ public class HySController {
         return new ResponseEntity(list,HttpStatus.OK);
     }
     
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody HySDTO hysDTO){
         if(StringUtils.isBlank(hysDTO.getName()))
             return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
         if(hysServ.existsByName(hysDTO.getName()))
             return new ResponseEntity(new Mensaje("Esa skill ya existe"),HttpStatus.BAD_REQUEST);
-        
-        HyS hys = new HyS(hysDTO.getName(), hysDTO.getPercentage());
+        Usuario usuario = usuarioService.getUserById(hysDTO.getUsuarioId()).orElseThrow(() -> new RuntimeException("No se pudo encontrar el usuario con el ID proporcionado."));
+        HyS hys = new HyS(hysDTO.getName(), hysDTO.getPercentage(), usuario);
         hysServ.save(hys);
         
         return new ResponseEntity(new Mensaje("Skill agregada"),HttpStatus.OK);
     }
     
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody HySDTO hysDTO){
         if(!hysServ.existsById(id))
@@ -74,7 +78,7 @@ public class HySController {
         return new ResponseEntity(new Mensaje("Skill actualizada"),HttpStatus.OK);
     }
     
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id){
         if(!hysServ.existsById(id))

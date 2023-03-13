@@ -7,6 +7,8 @@ package com.portfolio.backend.controller;
 import com.portfolio.backend.dto.ProyectosDTO;
 import com.portfolio.backend.model.Proyectos;
 import com.portfolio.backend.security.controller.Mensaje;
+import com.portfolio.backend.security.entity.Usuario;
+import com.portfolio.backend.security.service.UsuarioService;
 import com.portfolio.backend.service.ProyectosService;
 import java.math.BigInteger;
 import java.util.List;
@@ -41,6 +43,8 @@ public class ProyectosController {
     ProyectosService proyectosService;
     @Autowired
     private EntityManager entityManager;
+    @Autowired
+    private UsuarioService usuarioService;
     
     @GetMapping("/data")
     public Integer getData() {
@@ -64,7 +68,7 @@ public class ProyectosController {
         return new ResponseEntity(proyecto,HttpStatus.OK);
     }
     
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id){
         if(!proyectosService.existsById(id)){
@@ -74,7 +78,7 @@ public class ProyectosController {
         return new ResponseEntity(new Mensaje("Proyecto eliminado"),HttpStatus.OK);
     }
     
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody ProyectosDTO proyectosDTO){
         if(StringUtils.isBlank(proyectosDTO.getProyecto())){
@@ -87,12 +91,13 @@ public class ProyectosController {
             return new ResponseEntity(new Mensaje("Imagen obligatoria"),HttpStatus.BAD_REQUEST);
         }
       
-        Proyectos proyecto = new Proyectos(proyectosDTO.getProyecto(), proyectosDTO.getDescripcion(), proyectosDTO.getImg());
+        Usuario usuario = usuarioService.getUserById(proyectosDTO.getUsuarioId()).orElseThrow(() -> new RuntimeException("No se pudo encontrar el usuario con el ID proporcionado."));
+        Proyectos proyecto = new Proyectos(proyectosDTO.getProyecto(), proyectosDTO.getDescripcion(), proyectosDTO.getImg(), usuario);
         proyectosService.save(proyecto);
         return new ResponseEntity(new Mensaje("Proyecto creado"),HttpStatus.OK);
     }
     
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody ProyectosDTO proyectosDTO){
         if(!proyectosService.existsById(id)){

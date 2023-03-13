@@ -4,7 +4,9 @@
  */
 package com.portfolio.backend.security.entity;
 
+import com.portfolio.backend.model.Educacion;
 import com.portfolio.backend.model.Experiencia;
+import java.util.ArrayList;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -43,17 +45,18 @@ public class Usuario {
     private Set<Rol> roles = new HashSet<>();
     
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Experiencia> experiencia;
+    private List<Educacion> educacion = new ArrayList<>();
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Experiencia> experiencia = new ArrayList<>();
 
     // Constructores
 
     public Usuario() {
     }
 
-    public Usuario(String nombreUsuario, String password, List<Experiencia> experiencia) {
+    public Usuario(String nombreUsuario, String password) {
         this.nombreUsuario = nombreUsuario;
         this.password = password;
-        this.experiencia = experiencia;
     }
     
     // Getter y Setter
@@ -90,11 +93,4 @@ public class Usuario {
         this.roles = roles;
     }
     
-    public List<Experiencia> getExperiencia() {
-        return experiencia;
-    }
-    
-    public void setExperiencia(List<Experiencia> experiencia) {
-        this.experiencia = experiencia;
-    }
 }

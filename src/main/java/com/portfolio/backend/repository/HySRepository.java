@@ -5,6 +5,7 @@
 package com.portfolio.backend.repository;
 
 import com.portfolio.backend.model.HyS;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -15,5 +16,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface HySRepository extends JpaRepository<HyS, Integer> {
     public Optional<HyS> findByName(String name);
+    public List<HyS> findAllByUsuarioId(int id);
     public boolean existsByName(String name);
 }

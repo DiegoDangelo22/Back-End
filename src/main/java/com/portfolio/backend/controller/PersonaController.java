@@ -3,6 +3,8 @@ package com.portfolio.backend.controller;
 import com.portfolio.backend.dto.PersonaDTO;
 import com.portfolio.backend.model.Persona;
 import com.portfolio.backend.security.controller.Mensaje;
+import com.portfolio.backend.security.entity.Usuario;
+import com.portfolio.backend.security.service.UsuarioService;
 import com.portfolio.backend.service.PersonaService;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -26,6 +29,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class PersonaController {
     @Autowired
     PersonaService persoServ;
+    @Autowired
+    private UsuarioService usuarioService;
     
     @GetMapping("/lista")
     public ResponseEntity<List<Persona>> list(){
@@ -43,7 +48,7 @@ public class PersonaController {
         return new ResponseEntity(persona,HttpStatus.OK);
     }
     
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id){
         if(!persoServ.existsById(id)){
@@ -53,16 +58,16 @@ public class PersonaController {
         return new ResponseEntity(new Mensaje("Persona eliminada"),HttpStatus.OK);
     }
     
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody PersonaDTO personaDTO){
-      
-        Persona persona = new Persona(personaDTO.getNombre(), personaDTO.getApellido(), personaDTO.getDescripcion(), personaDTO.getProfesion(), personaDTO.getImg());
+      Usuario usuario = usuarioService.getUserById(personaDTO.getUsuarioId()).orElseThrow(() -> new RuntimeException("No se pudo encontrar el usuario con el ID proporcionado."));
+        Persona persona = new Persona(personaDTO.getNombre(), personaDTO.getApellido(), personaDTO.getDescripcion(), personaDTO.getProfesion(), personaDTO.getImg(), usuario);
         persoServ.save(persona);
         return new ResponseEntity(new Mensaje("Persona creada"),HttpStatus.OK);
     }
     
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody PersonaDTO personaDTO){
         if(!persoServ.existsById(id)){
