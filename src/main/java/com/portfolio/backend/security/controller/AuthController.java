@@ -4,7 +4,6 @@
  */
 package com.portfolio.backend.security.controller;
 
-import com.portfolio.backend.model.Educacion;
 import com.portfolio.backend.security.dto.JwtDTO;
 import com.portfolio.backend.security.dto.LoginUsuario;
 import com.portfolio.backend.security.dto.NuevoUsuario;
@@ -19,7 +18,6 @@ import com.portfolio.backend.service.EducacionService;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,8 +31,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -124,8 +120,9 @@ public class AuthController {
             return new ResponseEntity(new Mensaje("Campos obligatorios"),HttpStatus.BAD_REQUEST);
         if(!usuarioService.existsByNombreUsuario(loginUsuario.getNombreUsuario()))
             return new ResponseEntity(new Mensaje("Ese usuario no existe"), HttpStatus.BAD_REQUEST);
-        if(!usuarioService.existsByNombreUsuario(loginUsuario.getPassword()))
-            return new ResponseEntity(new Mensaje("Contraseña incorecta"), HttpStatus.BAD_REQUEST);
+        Usuario usuarios = usuarioService.getByNombreUsuario(loginUsuario.getNombreUsuario());
+        if(!passwordEncoder.matches(loginUsuario.getPassword(), usuarios.getPassword()))
+            return new ResponseEntity(new Mensaje("Contraseña incorrecta"), HttpStatus.BAD_REQUEST);
         
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUsuario.getNombreUsuario(), loginUsuario.getPassword()));
         

@@ -39,8 +39,7 @@ public class UsuarioController {
     public Integer getUserId(HttpServletRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        Optional<Usuario> optionalUsuario = usuarioService.getByNombreUsuario(username);
-        Usuario usuario = optionalUsuario.orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+        Usuario usuario = usuarioService.getByNombreUsuario(username);
         Integer usuarioId = usuario.getId();
         return usuarioId;
     }
